@@ -1,1 +1,4 @@
 .kitty
+src/config/__pycache__
+src/main/__pycache__
+src/main/migrations
