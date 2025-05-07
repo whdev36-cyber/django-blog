@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tag, Category, Post
+from .models import Tag, Category, Post, Widget
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
@@ -16,6 +16,11 @@ class PostAdmin(admin.ModelAdmin):
     readonly_fields = ['views', 'caps', 'created_at', 'updated_at']
     # autocomplete_fields = ['author', 'category', 'tags']
 
+class WidgetAdmin(admin.ModelAdmin):
+    list_display = ['title', 'content', 'created_at']
+    search_fields = ['title', 'content']
+
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Widget, WidgetAdmin)
