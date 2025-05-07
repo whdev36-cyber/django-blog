@@ -7,7 +7,8 @@ def home(request):
     featured_post = Post.objects.filter(is_public=True, is_featured=True).order_by('-created_at').first()
     posts = Post.objects.filter(is_public=True).exclude(id=featured_post.id if featured_post else None)
     categories = Category.objects.all()
-    widget = random.choice(Widget.objects.filter(is_active=True))
+    widgets = Widget.objects.filter(is_active=True)
+    widget = random.choice(widgets) if widgets.exists() else None
     return render(request, 'home.html', {
         'featured_post': featured_post,
         'posts': posts,
