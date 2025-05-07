@@ -80,3 +80,22 @@ class Post(models.Model):
     
 
 # class Comment(models.Model): pass
+
+class Widget(models.Model):
+    '''
+    Widget model represents a small application or component that can be embedded
+    in a web page. It includes a title, content, and an optional image.
+    '''
+
+    class Meta:
+        verbose_name = 'Widget'
+        verbose_name_plural = 'Widgets'
+
+    title = models.CharField(max_length=255)
+    content = models.TextField(blank=True, null=True)
+    # image = models.ImageField(upload_to='widgets/images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title  
