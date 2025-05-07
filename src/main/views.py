@@ -3,9 +3,15 @@ from .models import Post, Category
 
 # Home page view
 def home(request):
-    posts = Post.objects.filter(is_public=True).all()
+    featured_post = Post.objects.filter(is_public=True, is_featured=True).order_by('-created_at').first()
+    posts = Post.objects.filter(is_public=True).exclude(id=featured_post.id if featured_post else None)
     categories = Category.objects.all()
-    return render(request, 'home.html', {'posts': posts, 'categories': categories})
+    return render(request, 'home.html', {
+        'featured_post': featured_post,
+        'posts': posts,
+        'categories': categories
+    })
+
 
 # About page view
 def about(request):
