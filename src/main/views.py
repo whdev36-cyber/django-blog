@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from .models import Post, Category
 
 # Home page view
 def home(request):
-    return render(request, 'home.html') # Render the home.html template
+    posts = Post.objects.filter(is_public=True).all()
+    categories = Category.objects.all()
+    return render(request, 'home.html', {'posts': posts, 'categories': categories})
 
 # About page view
 def about(request):
