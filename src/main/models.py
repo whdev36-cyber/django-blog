@@ -66,6 +66,7 @@ class Post(models.Model):
     source = models.TextField(blank=True, null=True)
     views = models.PositiveIntegerField(default=0)
     caps = models.PositiveIntegerField(default=0)
+    is_public = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
