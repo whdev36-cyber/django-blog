@@ -1,20 +1,28 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Post, Category, Widget
 import random
 
-# Home page view
 def home(request):
     featured_post = Post.objects.filter(is_public=True, is_featured=True).order_by('-created_at').first()
-    posts = Post.objects.filter(is_public=True).exclude(id=featured_post.id if featured_post else None)
+    posts = Post.objects.filter(is_public=True).exclude(id=featured_post.id if featured_post else None).order_by('-created_at')
+
+    # Paginator
+    paginator = Paginator(posts, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     categories = Category.objects.all()
     widgets = Widget.objects.filter(is_active=True)
     widget = random.choice(widgets) if widgets.exists() else None
+
     return render(request, 'home.html', {
         'featured_post': featured_post,
-        'posts': posts,
+        'page_obj': page_obj,
         'categories': categories,
         'widget': widget
     })
+
 
 
 # About page view
