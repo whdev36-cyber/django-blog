@@ -10,7 +10,6 @@
     </div>
   </div>
 </header>
-
 <!-- Page content -->
 <div class="container">
   <div class="row">
@@ -92,7 +91,6 @@
         </div>
         {% endfor %} {% endif %}
       </div>
-
       <!-- Pagination-->
       <nav aria-label="Pagination">
         <hr class="my-0" />
@@ -115,7 +113,6 @@
         </ul>
       </nav>
     </div>
-
     <!-- Side widgets-->
     <div class="col-lg-4">
       <!-- Search widget-->
@@ -137,34 +134,22 @@
         </div>
       </div>
       <!-- Categories widget-->
+      {% if categories %}
       <div class="card mb-4">
         <div class="card-header">Categories</div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">Web Design</a></li>
-                <li><a href="#!">HTML</a></li>
-                <li><a href="#!">Freebies</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">JavaScript</a></li>
-                <li><a href="#!">CSS</a></li>
-                <li><a href="#!">Tutorials</a></li>
-              </ul>
-            </div>
+          <div class="list-group list-group-flush">
+            {% for category in categories %}
+            <a href="" class="list-group-item">{{ category.name }}</a>
+            {% endfor %}
           </div>
         </div>
       </div>
+      {% endif %}
       <!-- Side widget-->
       <div class="card mb-4">
         <div class="card-header">Side Widget</div>
-        <div class="card-body">
-          You can put anything you want inside of these side widgets. They are
-          easy to use, and feature the Bootstrap 5 card component!
-        </div>
+        <div class="card-body">{{ widget_message }}</div>
       </div>
     </div>
   </div>
