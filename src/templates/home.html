@@ -147,10 +147,12 @@
       </div>
       {% endif %}
       <!-- Side widget-->
+      {% if widget %}
       <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">{{ widget_message }}</div>
+        <div class="card-header">{{ widget.title }}</div>
+        <div class="card-body">{{ widget.content }}</div>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
