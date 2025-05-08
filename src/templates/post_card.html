@@ -1,0 +1,20 @@
+<div class="col-md-6">
+    <div class="card mb-4">
+        <a href="">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top" />
+            {% elif post.image_url %}
+                <img src="{{ post.image_url }}" alt="{{ post.title }}" class="card-img-top" />
+            {% else %}
+                <img src="https://dummyimage.com/700x350/dee2e6/6c757d&text={{ post.title|urlencode }}"
+                    alt="{{ post.title }}" class="card-img-top" />
+            {% endif %}
+        </a>
+        <div class="card-body">
+            <div class="small text-muted">{{ post.created_at|date:"M d, Y" }}</div>
+            <h2 class="cart-title h4">{{ post.title|striptags }}</h2>
+            <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+            <a class="btn btn-primary" href="">Read more <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</div>

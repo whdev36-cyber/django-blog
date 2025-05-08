@@ -17,64 +17,18 @@
             <div class="col-lg-8">
                 <!-- Featured blog post -->
                 {% if featured_post %}
-                    <div class="card mb-4">
-                        <a href="">
-                            {% if post.image %}
-                                <img src="{{ post.image.url }}"
-                                     alt="{{ post.title }}"
-                                     class="card-img-top" />
-                            {% elif post.image_url %}
-                                <img src="{{ post.image_url }}"
-                                     alt="{{ post.title }}"
-                                     class="card-img-top" />
-                            {% else %}
-                                <img src="https://dummyimage.com/850x350/dee2e6/6c757d&text={{ featured_post.title|urlencode }}"
-                                     alt="{{ post.title }}"
-                                     class="card-img-top" />
-                            {% endif %}
-                        </a>
-                        <div class="card-body">
-                            <div class="small text-muted">{{ featured_post.created_at|date:"M d, Y" }}</div>
-                            <h2 class="card-title">{{ featured_post.title }}</h2>
-                            <p class="card-text">{{ featured_post.content|truncatewords:30 }}</p>
-                            <a class="btn btn-primary" href="#!">Read more <i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    {% include 'featured_post_card.html' %}
                 {% endif %}
                 <!-- Nested row for non-featured blog posts -->
                 <div class="row">
                     {% if page_obj %}
                         {% for post in page_obj %}
-                            <div class="col-md-6">
-                                <div class="card mb-4">
-                                    <a href="">
-                                        {% if post.image %}
-                                            <img src="{{ post.image.url }}"
-                                                 alt="{{ post.title }}"
-                                                 class="card-img-top" />
-                                        {% elif post.image_url %}
-                                            <img src="{{ post.image_url }}"
-                                                 alt="{{ post.title }}"
-                                                 class="card-img-top" />
-                                        {% else %}
-                                            <img src="https://dummyimage.com/700x350/dee2e6/6c757d&text={{ post.title|urlencode }}"
-                                                 alt="{{ post.title }}"
-                                                 class="card-img-top" />
-                                        {% endif %}
-                                    </a>
-                                    <div class="card-body">
-                                        <div class="small text-muted">{{ post.created_at|date:"M d, Y" }}</div>
-                                        <h2 class="cart-title h4">{{ post.title }}</h2>
-                                        <p class="card-text">{{ post.content|truncatewords:30 }}</p>
-                                        <a class="btn btn-primary" href="">Read more <i class="bi bi-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include 'post_card.html' %}
                         {% endfor %}
                     {% endif %}
                 </div>
                 <!-- Pagination-->
-                <nav aria-label="Page navigation">
+                <nav>
                     <ul class="pagination justify-content-center">
                         {% if page_obj.has_previous %}
                             <li class="page-item">
@@ -100,14 +54,11 @@
                 <div class="card mb-4">
                     <div class="card-header">Search</div>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control"
-                                   type="search"
-                                   placeholder="Enter search term..."
-                                   aria-label="Enter search term..."
-                                   aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
+                        <form action="" method="get" class="input-group">
+                            <input class="form-control" type="search" placeholder="Enter search term..."
+                                name="q" id="search" />
+                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                        </form>
                     </div>
                 </div>
                 <!-- Categories widget-->
@@ -116,7 +67,9 @@
                         <div class="card-header">Categories</div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                {% for category in categories %}<a href="" class="list-group-item">{{ category.name }}</a>{% endfor %}
+                                {% for category in categories %}
+                                    <a href="" class="list-group-item">{{ category.name }}</a>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -130,5 +83,5 @@
                 {% endif %}
             </div>
         </div>
-    </div>
+</div>
 {% endblock %}
