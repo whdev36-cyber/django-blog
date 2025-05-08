@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Widget
 import random
+from django.http import HttpResponse
 
 def home(request):
     featured_post = Post.objects.filter(is_public=True, is_featured=True).order_by('-created_at').first()
@@ -24,6 +25,9 @@ def home(request):
     })
 
 
+def post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+    return HttpResponse(post.title)
 
 # About page view
 def about(request):

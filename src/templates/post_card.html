@@ -1,6 +1,6 @@
 <div class="col-md-6">
     <div class="card mb-4">
-        <a href="">
+        <a href="{% url 'post_detail' post.id %}">
             {% if post.image %}
                 <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top" />
             {% elif post.image_url %}
@@ -14,7 +14,7 @@
             <div class="small text-muted">{{ post.created_at|date:"M d, Y" }}</div>
             <h2 class="cart-title h4">{{ post.title|striptags }}</h2>
             <p class="card-text">{{ post.content|truncatewords:30 }}</p>
-            <a class="btn btn-primary" href="">Read more <i class="bi bi-arrow-right"></i></a>
+            <a class="btn btn-primary" href="{% url 'post_detail' post.id %}">Read more <i class="bi bi-arrow-right"></i></a>
         </div>
     </div>
 </div>
