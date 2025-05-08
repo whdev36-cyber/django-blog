@@ -13,13 +13,10 @@
     <!-- Page content -->
     <div class="container">
         <div class="row">
-            <!-- Blog entries -->
             <div class="col-lg-8">
-                <!-- Featured blog post -->
                 {% if featured_post %}
                     {% include 'featured_post_card.html' %}
                 {% endif %}
-                <!-- Nested row for non-featured blog posts -->
                 <div class="row">
                     {% if page_obj %}
                         {% for post in page_obj %}
@@ -27,7 +24,6 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <!-- Pagination-->
                 <nav>
                     <ul class="pagination justify-content-center">
                         {% if page_obj.has_previous %}
@@ -48,33 +44,29 @@
                     </ul>
                 </nav>
             </div>
-            <!-- Side widgets-->
             <div class="col-lg-4">
-                <!-- Search widget-->
                 <div class="card mb-4">
                     <div class="card-header">Search</div>
                     <div class="card-body">
-                        <form action="" method="get" class="input-group">
+                        <form action="{% url 'search' %}" method="get" class="input-group">
                             <input class="form-control" type="search" placeholder="Enter search term..."
                                 name="q" id="search" />
                             <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
                         </form>
                     </div>
                 </div>
-                <!-- Categories widget-->
                 {% if categories %}
                     <div class="card mb-4">
                         <div class="card-header">Categories</div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
                                 {% for category in categories %}
-                                    <a href="" class="list-group-item">{{ category.name }}</a>
+                                    <a href="{% url 'category_detail' category.id %}" class="list-group-item">{{ category.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
                 {% endif %}
-                <!-- Side widget-->
                 {% if widget %}
                     <div class="card mb-4">
                         <div class="card-header">{{ widget.title }}</div>
@@ -83,5 +75,5 @@
                 {% endif %}
             </div>
         </div>
-</div>
+    </div>
 {% endblock %}

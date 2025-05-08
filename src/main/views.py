@@ -29,6 +29,14 @@ def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
     return HttpResponse(post.title)
 
+def category_detail(request, id):
+    category = get_object_or_404(Category, id=id)
+    return HttpResponse(category.name)
+
+
+def search(request):
+    return HttpResponse('search')
+
 # About page view
 def about(request):
     return render(request, 'about.html') # Render the about.html template
