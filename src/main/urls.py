@@ -6,6 +6,6 @@ urlpatterns = [
     path('about/', views.about, name='about'), # About page
     path('yay/', views.yay, name='yay'), # YAY!
     path('post/detail/<int:id>/', views.post_detail, name='post_detail'), # Post detail page
-    path('category/detail/<int:id>/', views.category_detail, name='category_detail'), # Category detail page
+    path('category/detail/<slug:slug>/', views.category_detail, name='category_detail'), # Category detail page
     path('search/', views.search, name='search'), # Search
 ]

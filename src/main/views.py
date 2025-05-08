@@ -29,8 +29,8 @@ def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
     return HttpResponse(post.title)
 
-def category_detail(request, id):
-    category = get_object_or_404(Category, id=id)
+def category_detail(request, slug):
+    category = get_object_or_404(Category, slug=slug)
     return HttpResponse(category.name)
 
 
