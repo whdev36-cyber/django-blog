@@ -1,62 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    <!-- Header content -->
-    <header class="p-5 bg-light border-bottom mb-4">
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder">Welcome to BLOG!</h1>
-                <p class="lead mb-0">A simple blog application built with Django and Bootstrap.</p>
-            </div>
-        </div>
-    </header>
-    <!-- Page content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                {% if featured_post %}
-                    {% include 'components/featured_post_card.html' %}
-                {% endif %}
-                <div class="row">
-                    {% if page_obj %}
-                        {% for post in page_obj %}
-                            {% include 'components/post_card.html' %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                {% include 'components/pagination.html' %}
-            </div>
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <form action="{% url 'search' %}" method="get" class="input-group">
-                            {% csrf_token %}
-                            <input class="form-control" type="search" placeholder="Enter search term..." name="q"
-                                id="search" />
-                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
-                        </form>
-                    </div>
-                </div>
-                {% if categories %}
-                    <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                            <div class="list-group list-group-flush">
-                                {% for category in categories %}
-                                    <a href="{% url 'category_detail' category.slug %}" class="list-group-item">{{ category.name }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                {% if widget %}
-                    <div class="card mb-4">
-                        <div class="card-header">{{ widget.title }}</div>
-                        <div class="card-body">{{ widget.content }}</div>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+<div class="col-lg-8">
+    {% if featured_post %}
+        {% include 'components/featured_post_card.html' %}
+    {% endif %}
+    <div class="row">
+        {% if page_obj %}
+            {% for post in page_obj %}
+                {% include 'components/post_card.html' %}
+            {% endfor %}
+        {% endif %}
     </div>
+    {% include 'components/pagination.html' %}
+</div>
 {% endblock %}
