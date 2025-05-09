@@ -14,7 +14,9 @@
                 href="{% url 'category_detail' featured_post.category.slug %}"
                 class="text-decoration-none badge bg-primary">{{ featured_post.category.name }}</a></div>
         <h2 class="card-title">{{ featured_post.title|escape }}</h2>
-        <p class="card-text">{{ featured_post.content|truncatewords:30 }}</p>
+        <div class="card-text">
+            {{ featured_post.content_html|truncatewords:30|safe }}
+        </div>
         <a class="btn btn-primary" href="{% url 'post_detail' featured_post.id %}">Read more <i
                 class="bi bi-arrow-right"></i></a>
     </div>

@@ -15,7 +15,9 @@
                     href="{% url 'category_detail' post.category.slug %}"
                     class="text-decoration-none badge bg-primary">{{ post.category.name }}</a></div>
             <h2 class="cart-title h4">{{ post.title|striptags }}</h2>
-            <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+            <div class="card-text">
+                {{ post.content_html|truncatewords:30|safe }}
+            </div>
             <a class="btn btn-primary" href="{% url 'post_detail' post.id %}">Read more <i
                     class="bi bi-arrow-right"></i></a>
         </div>
