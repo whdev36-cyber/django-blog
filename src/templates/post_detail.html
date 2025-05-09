@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<div class="col-lg-8">
+    <article>
+        <header class="mb-4">
+            <h1 class="fw-bolder mb-1">{{ post.title|escape }}</h1>
+            <div class="text-muted mb-2">{{ post.created_at|date:"M d, Y" }} | <a
+                    href="{% url 'category_detail' post.category.slug %}"
+                    class="text-decoration-none badge bg-primary">{{ post.category.name }}</a></div>
+            {% if post.tags %}
+                {% for tag in post.tags.all %}
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ tag.name }}</a>
+                {% endfor %}
+            {% endif %}
+        </header>
+        <figure class="mb-4">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="card-img-top" />
+            {% elif post.image_url %}
+                <img src="{{ post.image_url }}" alt="{{ post.title }}" class="card-img-top" />
+            {% else %}
+                <img src="https://dummyimage.com/700x350/dee2e6/6c757d&text={{ post.title|urlencode }}"
+                    alt="{{ post.title }}" class="card-img-top" />
+            {% endif %}
+        </figure>
+        <section class="mb-5">
+            {{ post.content|safe }}
+        </section>
+    </article>
+</div>
+{% endblock %}
