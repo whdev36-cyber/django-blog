@@ -31,6 +31,7 @@
                     <div class="card-header">Search</div>
                     <div class="card-body">
                         <form action="{% url 'search' %}" method="get" class="input-group">
+                            {% csrf_token %}
                             <input class="form-control" type="search" placeholder="Enter search term..." name="q"
                                 id="search" />
                             <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
