@@ -13,15 +13,10 @@ def home(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    categories = Category.objects.all()
-    widgets = Widget.objects.filter(is_active=True)
-    widget = random.choice(widgets) if widgets.exists() else None
 
     return render(request, 'home.html', {
         'featured_post': featured_post,
         'page_obj': page_obj,
-        'categories': categories,
-        'widget': widget
     })
 
 
