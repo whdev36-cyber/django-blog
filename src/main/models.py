@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+import markdown
+import bleach
 
 # Tag model
 class Tag(models.Model):
@@ -77,6 +79,15 @@ class Post(models.Model):
         
     def __str__(self):
         return self.title
+    
+    @property
+    def content_html(self):
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                        'h1', 'h2', 'h3', 'p']
+        html = markdown.markdown(self.content, output_format='html')
+        cleaned = bleach.clean(html, tags=allowed_tags, strip=True)
+        return bleach.linkify(cleaned)
     
 
 # class Comment(models.Model): pass
