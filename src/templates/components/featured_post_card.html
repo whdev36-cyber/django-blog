@@ -10,9 +10,12 @@
         {% endif %}
     </a>
     <div class="card-body">
-        <div class="small text-muted">{{ featured_post.created_at|date:"M d, Y" }}</div>
+        <div class="small text-muted">{{ featured_post.created_at|date:"M d, Y" }} | <a
+                href="{% url 'category_detail' featured_post.category.slug %}"
+                class="text-decoration-none badge bg-primary">{{ featured_post.category.name }}</a></div>
         <h2 class="card-title">{{ featured_post.title|escape }}</h2>
         <p class="card-text">{{ featured_post.content|truncatewords:30 }}</p>
-        <a class="btn btn-primary" href="{% url 'post_detail' featured_post.id %}">Read more <i class="bi bi-arrow-right"></i></a>
+        <a class="btn btn-primary" href="{% url 'post_detail' featured_post.id %}">Read more <i
+                class="bi bi-arrow-right"></i></a>
     </div>
 </div>
