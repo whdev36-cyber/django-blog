@@ -85,7 +85,7 @@ class Post(models.Model):
         allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
                         'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
                         'h1', 'h2', 'h3', 'p']
-        html = markdown.markdown(self.content, output_format='html')
+        html = markdown.markdown(self.content, output_format='html', extensions=['fenced_code', 'codehilite'])
         cleaned = bleach.clean(html, tags=allowed_tags, strip=True)
         return bleach.linkify(cleaned)
     
