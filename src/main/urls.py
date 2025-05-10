@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/detail/<int:id>/', views.post_detail, name='post_detail'), # Post detail page
     path('category/detail/<slug:slug>/', views.category_detail, name='category_detail'), # Category detail page
     path('search/', views.search, name='search'), # Search
+    # path('tag/detail/<slug:slug>/', views.tag_detail, name='tag_detail'), # Tag
 ]
